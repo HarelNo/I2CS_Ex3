@@ -1,3 +1,5 @@
+package PacMan;
+
 public class Index2D implements Pixel2D {
     private int _x, _y;
     public Index2D() {this(0,0);}
@@ -13,7 +15,7 @@ public class Index2D implements Pixel2D {
     }
     public double distance2D(Pixel2D t) {
             if (t == null){
-                throw new RuntimeException("Pixel2D given is null");
+                throw new RuntimeException("PacMan.Pixel2D given is null");
             }
             return Math.sqrt(Math.pow((_y -t.getY()),2) + Math.pow((_x -t.getX()),2));
     }

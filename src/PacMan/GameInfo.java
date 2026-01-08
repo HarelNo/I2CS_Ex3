@@ -1,3 +1,5 @@
+package PacMan;
+
 import exe.ex3.game.PacManAlgo;
 /**
  * This class contains all the needed parameters for the Pacman game.
@@ -12,6 +14,6 @@ public class GameInfo {
 	public static final double RESOLUTION_NORM = 1.2; // [0.75,1.2]
 	private static PacManAlgo _manualAlgo = new ManualAlgo();
 	private static PacManAlgo _myAlgo = new Ex3Algo();
-    public static final PacManAlgo ALGO = _manualAlgo;
-//	public static final PacManAlgo ALGO = _myAlgo;
+ //   public static final PacManAlgo ALGO = _manualAlgo;
+	public static final PacManAlgo ALGO = _myAlgo;
 }

@@ -1,3 +1,5 @@
+package PacMan;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -337,7 +339,7 @@ public class Map implements Map2D {
             return true;
         }
         catch (NullPointerException error){
-            throw new RuntimeException("Map contains an empty array");
+            throw new RuntimeException("PacMan.Map contains an empty array");
         }
     }
 }
