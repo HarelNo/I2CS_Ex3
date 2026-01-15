@@ -46,7 +46,7 @@ public class Ex3Algo implements PacManAlgo{
 			int up = Game.UP, left = Game.LEFT, down = Game.DOWN, right = Game.RIGHT;
 		}
 		_count++;
-		int dir = Game.LEFT;
+		int dir = moveSelect(game);
 		return dir;
 	}
 	private static void printBoard(int[][] b) {
@@ -75,8 +75,76 @@ public class Ex3Algo implements PacManAlgo{
         Pixel2D closest = closestPink(game);
         String pos = game.getPos(0);
         Pixel2D Pac = new Index2D(Integer.parseInt(pos.split(",")[0]),Integer.parseInt(pos.split(",")[1]));
+        GhostCL[] ghosts = game.getGhosts(0);
+        for (int i = 0; i < ghosts.length; i++){
+            Pixel2D ghost = new Index2D(Integer.parseInt(ghosts[i].getPos(0).split(",")[0]),Integer.parseInt(ghosts[i].getPos(0).split(",")[1]));
+            board.setPixel(ghost,blue);
+            if (ghost.getX() != 0){
+                Pixel2D temp = new Index2D(ghost.getX()-1,ghost.getY());
+                board.setPixel(temp, blue);
+            } else if (game.isCyclic()) {
+                Pixel2D temp = new Index2D(board.getMap().length-1,ghost.getY());
+                board.setPixel(temp, blue);
+            }
+            if (ghost.getX() != board.getMap().length-1){
+                Pixel2D temp = new Index2D(ghost.getX()+1,ghost.getY());
+                board.setPixel(temp, blue);
+            } else if (game.isCyclic()) {
+                Pixel2D temp = new Index2D(0,ghost.getY());
+                board.setPixel(temp, blue);
+            }
+            if (ghost.getY() != 0){
+                Pixel2D temp = new Index2D(ghost.getX(),ghost.getY()-1);
+                board.setPixel(temp, blue);
+            } else if (game.isCyclic()) {
+                Pixel2D temp = new Index2D(ghost.getX(),board.getMap()[0].length-1);
+                board.setPixel(temp, blue);
+            }
+            if (ghost.getY() != board.getMap()[0].length-1){
+                Pixel2D temp = new Index2D(ghost.getX(),ghost.getY()+1);
+                board.setPixel(temp, blue);
+            } else if (game.isCyclic()) {
+                Pixel2D temp = new Index2D(ghost.getX(),0);
+                board.setPixel(temp, blue);
+            }
+        }
         Pixel2D[] path = board.shortestPath(Pac,closest,blue);
-
+        if (Pac.getX() != 0) {
+            if (path[1].getX() == Pac.getX() - 1) {
+                return Game.LEFT;
+            }
+        } else if (game.isCyclic()) {
+            if (path[1].getX() == board.getMap().length - 1){
+                return Game.LEFT;
+            }
+        }
+        if (Pac.getX() != board.getMap().length - 1){
+            if (path[1].getX() == Pac.getX() + 1){
+                return Game.RIGHT;
+            }
+        } else if (game.isCyclic()) {
+            if (path[1].getX() == 0){
+                return Game.RIGHT;
+            }
+        }
+        if (Pac.getY() != 0) {
+            if (path[1].getY() == Pac.getY() - 1) {
+                return Game.DOWN;
+            }
+        } else if (game.isCyclic()) {
+            if (path[1].getY() == board.getMap()[0].length - 1){
+                return Game.DOWN;
+            }
+        }
+        if (Pac.getY() != board.getMap()[0].length - 1){
+            if (path[1].getY() == Pac.getY() + 1){
+                return Game.UP;
+            }
+        } else if (game.isCyclic()) {
+            if (path[1].getY() == 0){
+                return Game.UP;
+            }
+        }
         return 0;
     }
     private static Pixel2D closestPink(PacmanGame game){
@@ -108,7 +176,7 @@ public class Ex3Algo implements PacManAlgo{
                     ans = new Index2D(board.length-1,queue.peek().getY());
                     return ans;
                 } else if (board[board.length-1][queue.peek().getY()] != pink){
-                    if (board[queue.peek().getX()-1][queue.peek().getY()] != blue) {
+                    if (board[board.length-1][queue.peek().getY()] != blue) {
                         Pixel2D temp = new Index2D(board.length - 1, queue.peek().getY());
                         queue.add(temp);
                     }
@@ -129,7 +197,7 @@ public class Ex3Algo implements PacManAlgo{
                     ans = new Index2D(0,queue.peek().getY());
                     return ans;
                 } else if (board[0][queue.peek().getY()] != pink){
-                    if (board[queue.peek().getX()-1][queue.peek().getY()] != blue) {
+                    if (board[0][queue.peek().getY()] != blue) {
                         Pixel2D temp = new Index2D(0, queue.peek().getY());
                         queue.add(temp);
                     }

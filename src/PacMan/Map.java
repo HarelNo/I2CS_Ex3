@@ -160,64 +160,65 @@ public class Map implements Map2D {
         Pixel2D temp = new Index2D(p2);
         Pixel2D[] ans = new Pixel2D[p];
         ans[p-1] = new Index2D(p2);
+        p--;
         while (ans[0] == null){
             if (temp.getX() != 0){
                 if (pathMap[temp.getX()-1][temp.getY()] == pathMap[temp.getX()][temp.getY()]-1){
                     ans[p-1] = new Index2D(temp.getX()-1, temp.getY());
-                    p--;
                     temp = ans[p-1];
+                    p--;
                     continue;
                 }
             } else if (_cyclicFlag) {
                 if (pathMap[pathMap.length-1][temp.getY()] == pathMap[temp.getX()][temp.getY()]-1){
                     ans[p-1] = new Index2D(pathMap.length-1, temp.getY());
-                    p--;
                     temp = ans[p-1];
+                    p--;
                     continue;
                 }
             }
             if (temp.getX() != pathMap.length-1){
                 if (pathMap[temp.getX()+1][temp.getY()] == pathMap[temp.getX()][temp.getY()]-1) {
                     ans[p-1] = new Index2D(temp.getX() + 1, temp.getY());
-                    p--;
                     temp = ans[p-1];
+                    p--;
                     continue;
                 }
             } else if (_cyclicFlag) {
                 if (pathMap[0][temp.getY()] == pathMap[temp.getX()][temp.getY()]-1){
                     ans[p-1] = new Index2D(0, temp.getY());
-                    p--;
                     temp = ans[p-1];
+                    p--;
                     continue;
                 }
             }
             if (temp.getY() != 0){
                 if (pathMap[temp.getX()][temp.getY()-1] == pathMap[temp.getX()][temp.getY()]-1) {
                     ans[p-1] = new Index2D(temp.getX(),temp.getY()-1);
-                    p--;
                     temp = ans[p-1];
+                    p--;
                     continue;
                 }
             } else if (_cyclicFlag) {
                 if (pathMap[temp.getX()][pathMap[0].length-1] == pathMap[temp.getX()][temp.getY()]-1){
                     ans[p-1] = new Index2D(temp.getX(),pathMap[0].length-1);
-                    p--;
                     temp = ans[p-1];
+                    p--;
                     continue;
                 }
             }
             if (temp.getY() != pathMap[0].length-1){
                 if (pathMap[temp.getX()][temp.getY()+1] == pathMap[temp.getX()][temp.getY()]-1){
                     ans[p-1] = new Index2D(temp.getX(),temp.getY()+1);
-                    p--;
                     temp = ans[p-1];
+                    p--;
                     continue;
                 }
             } else if (_cyclicFlag) {
                 if (pathMap[temp.getX()][0] == pathMap[temp.getX()][temp.getY()]-1){
                     ans[p-1] = new Index2D(temp.getX(),0);
-                    p--;
                     temp = ans[p-1];
+                    p--;
                     continue;
                 }
             }
