@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Ex3_v09e.jar-out">
+    <ANNOTATIONS>
+      <root url="file://$PROJECT_DIR$/images" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/Ex3_v09e.jar-out.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/src" />
+    </SOURCES>
+  </library>
+</component>
