@@ -1,6 +1,4 @@
-package PacMan;
-
-import PacMan2.Pixel2D;
+package PacMan2;
 
 /**
  * This interface represents a 2D map as a raster matrix or maze.
@@ -63,7 +61,7 @@ public interface Map2D {
 	 * @param p the x,y coordinate
 	 * @return the [p.x][p.y] (int) value of the map.
 	 */
-	public int getPixel(PacMan2.Pixel2D p);
+	public int getPixel(Pixel2D p);
 
 	/**
 	 * Set the [x][y] coordinate of the map to v.
@@ -77,13 +75,13 @@ public interface Map2D {
 	 * @param p the coordinate in the map.
 	 * @param v the value that the entry at the coordinate [p.x][p.y] is set to.
 	 */
-	public void setPixel(PacMan2.Pixel2D p, int v);
+	public void setPixel(Pixel2D p, int v);
 
 	/**
 	 * @param p the 2D coordinate.
 	 * @return true iff p is with in this map.
 	 */
-	boolean isInside(PacMan2.Pixel2D p);
+	boolean isInside(Pixel2D p);
 
 	/**
 	 * @return true iff this map should be addressed as a cyclic one.
@@ -105,7 +103,7 @@ public interface Map2D {
 	 * @param new_v - the new "color" to be filled in p's connected component.
 	 * @return the number of "filled" pixels.
 	 */
-	public int fill(PacMan2.Pixel2D p, int new_v);
+	public int fill(Pixel2D p, int new_v);
 
 	/**
 	 * Compute the shortest valid path between p1 and p2.
@@ -125,7 +123,7 @@ public interface Map2D {
 	 * @param obsColor the color which is addressed as an obstacle.
 	 * @return the shortest path as an array of consecutive pixels, if none - returns null.
 	 */
-	public PacMan2.Pixel2D[] shortestPath(PacMan2.Pixel2D p1, PacMan2.Pixel2D p2, int obsColor);
+	public Pixel2D[] shortestPath(Pixel2D p1, Pixel2D p2, int obsColor);
 
 	/**
 	 * Compute a new map (with the same dimension as this map) with the
@@ -135,5 +133,5 @@ public interface Map2D {
 	 * @param obsColor the color representing obstacles
 	 * @return a new map with all the shortest path distances from the starting point to each entry in this map.
 	 */
-	public PacMan2.Map2D allDistance(Pixel2D start, int obsColor);
+	public Map2D allDistance(Pixel2D start, int obsColor);
 }

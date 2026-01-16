@@ -1,7 +1,5 @@
-package PacMan;
+package PacMan2;
 
-import PacMan2.Ex3Algo;
-import PacMan2.ManualAlgo;
 import exe.ex3.game.PacManAlgo;
 /**
  * This class contains all the needed parameters for the Pacman game.

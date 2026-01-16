@@ -1,6 +1,5 @@
-package PacMan;
+package PacMan2;
 
-import PacMan2.GameInfo;
 import exe.ex3.game.Game;
 import exe.ex3.game.PacManAlgo;
 import exe.ex3.game.PacmanGame;
@@ -30,7 +29,7 @@ public class Ex3Main {
     }
     public static void play1() {
     	Game ex3 = new Game();//new Game(level);
-    	ex3.init(PacMan2.GameInfo.CASE_SCENARIO, PacMan2.GameInfo.MY_ID, PacMan2.GameInfo.CYCLIC_MODE, PacMan2.GameInfo.RANDOM_SEED, PacMan2.GameInfo.RESOLUTION_NORM, PacMan2.GameInfo.DT, -1);
+    	ex3.init(GameInfo.CASE_SCENARIO, GameInfo.MY_ID, GameInfo.CYCLIC_MODE, GameInfo.RANDOM_SEED, GameInfo.RESOLUTION_NORM, GameInfo.DT, -1);
         PacManAlgo man = GameInfo.ALGO;
         while(ex3.getStatus()!=PacmanGame.DONE) {
             _cmd = ex3.getKeyChar();

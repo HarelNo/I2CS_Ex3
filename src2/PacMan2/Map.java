@@ -1,8 +1,4 @@
-package PacMan;
-
-import PacMan2.Index2D;
-import PacMan2.Map2D;
-import PacMan2.Pixel2D;
+package PacMan2;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -12,7 +8,7 @@ import java.util.Queue;
  * @author boaz.benmoshe
  *
  */
-public class Map implements PacMan2.Map2D {
+public class Map implements Map2D {
 	private int[][] _map;
 	private boolean _cyclicFlag = true;
 	
@@ -67,7 +63,7 @@ public class Map implements PacMan2.Map2D {
 	public int getPixel(int x, int y) { return _map[x][y];}
 	@Override
 	/////// add your code below ///////
-	public int getPixel(PacMan2.Pixel2D p) {
+	public int getPixel(Pixel2D p) {
 		return this.getPixel(p.getX(),p.getY());
 	}
 	@Override
@@ -75,7 +71,7 @@ public class Map implements PacMan2.Map2D {
 	public void setPixel(int x, int y, int v) {this._map[x][y] = v;}
 	@Override
 	/////// add your code below ///////
-	public void setPixel(PacMan2.Pixel2D p, int v) {
+	public void setPixel(Pixel2D p, int v) {
 		setPixel(p.getX(),p.getY(),v);
 	}
 	@Override
@@ -83,65 +79,65 @@ public class Map implements PacMan2.Map2D {
 	 * Fills this map with the new color (new_v) starting from p.
 	 * https://en.wikipedia.org/wiki/Flood_fill
 	 */
-	public int fill(PacMan2.Pixel2D xy, int new_v) {
+	public int fill(Pixel2D xy, int new_v) {
         int ans = 0;
         int oldColor = this._map[xy.getX()][xy.getY()];
         if (oldColor == new_v)
             return 0;
-        Queue<PacMan2.Pixel2D> queue = new LinkedList<PacMan2.Pixel2D>();
-        PacMan2.Pixel2D start = new PacMan2.Index2D(xy);
+        Queue<Pixel2D> queue = new LinkedList<Pixel2D>();
+        Pixel2D start = new Index2D(xy);
         this._map[start.getX()][start.getY()] = new_v;
         queue.add(start);
         while (queue.peek() != null){
             ans++;
             if (queue.peek().getX() != 0){
                 if (this._map[queue.peek().getX()-1][queue.peek().getY()] == oldColor){
-                    PacMan2.Pixel2D temp = new PacMan2.Index2D(queue.peek().getX()-1,queue.peek().getY());
+                    Pixel2D temp = new Index2D(queue.peek().getX()-1,queue.peek().getY());
                     this._map[temp.getX()][temp.getY()] = new_v;
                     queue.add(temp);
                 }
             } else if (_cyclicFlag) {
                 if (this._map[this._map.length-1][queue.peek().getY()] == oldColor){
-                    PacMan2.Pixel2D temp = new PacMan2.Index2D(this._map.length-1,queue.peek().getY());
+                    Pixel2D temp = new Index2D(this._map.length-1,queue.peek().getY());
                     this._map[temp.getX()][temp.getY()] = new_v;
                     queue.add(temp);
                 }
             }
             if (queue.peek().getX() != this._map.length-1){
                 if (this._map[queue.peek().getX()+1][queue.peek().getY()] == oldColor){
-                    PacMan2.Pixel2D temp = new PacMan2.Index2D(queue.peek().getX()+1,queue.peek().getY());
+                    Pixel2D temp = new Index2D(queue.peek().getX()+1,queue.peek().getY());
                     this._map[temp.getX()][temp.getY()] = new_v;
                     queue.add(temp);
                 }
             } else if (_cyclicFlag) {
                 if (this._map[0][queue.peek().getY()] == oldColor){
-                    PacMan2.Pixel2D temp = new PacMan2.Index2D(0,queue.peek().getY());
+                    Pixel2D temp = new Index2D(0,queue.peek().getY());
                     this._map[temp.getX()][temp.getY()] = new_v;
                     queue.add(temp);
                 }
             }
             if (queue.peek().getY() != 0){
                 if (this._map[queue.peek().getX()][queue.peek().getY()-1] == oldColor){
-                    PacMan2.Pixel2D temp = new PacMan2.Index2D(queue.peek().getX(),queue.peek().getY()-1);
+                    Pixel2D temp = new Index2D(queue.peek().getX(),queue.peek().getY()-1);
                     this._map[temp.getX()][temp.getY()] = new_v;
                     queue.add(temp);
                 }
             } else if (_cyclicFlag) {
                 if (this._map[queue.peek().getX()][this._map[0].length-1] == oldColor){
-                    PacMan2.Pixel2D temp = new PacMan2.Index2D(queue.peek().getX(),this._map[0].length-1);
+                    Pixel2D temp = new Index2D(queue.peek().getX(),this._map[0].length-1);
                     this._map[temp.getX()][temp.getY()] = new_v;
                     queue.add(temp);
                 }
             }
             if (queue.peek().getY() != this._map[0].length-1){
                 if (this._map[queue.peek().getX()][queue.peek().getY()+1] == oldColor){
-                    PacMan2.Pixel2D temp = new PacMan2.Index2D(queue.peek().getX(),queue.peek().getY()+1);
+                    Pixel2D temp = new Index2D(queue.peek().getX(),queue.peek().getY()+1);
                     this._map[temp.getX()][temp.getY()] = new_v;
                     queue.add(temp);
                 }
             } else if (_cyclicFlag) {
                 if (this._map[queue.peek().getX()][0] == oldColor){
-                    PacMan2.Pixel2D temp = new PacMan2.Index2D(queue.peek().getX(),0);
+                    Pixel2D temp = new Index2D(queue.peek().getX(),0);
                     this._map[temp.getX()][temp.getY()] = new_v;
                     queue.add(temp);
                 }
@@ -156,26 +152,26 @@ public class Map implements PacMan2.Map2D {
 	 * BFS like shortest the computation based on iterative raster implementation of BFS, see:
 	 * https://en.wikipedia.org/wiki/Breadth-first_search
 	 */
-	public PacMan2.Pixel2D[] shortestPath(PacMan2.Pixel2D p1, PacMan2.Pixel2D p2, int obsColor) {
+	public Pixel2D[] shortestPath(Pixel2D p1, Pixel2D p2, int obsColor) {
         int[][] pathMap = this.allDistance(p1, obsColor).getMap();
         if (pathMap[p1.getX()][p1.getY()] == -1)
             return null;
         int p = pathMap[p2.getX()][p2.getY()]+1;
-        PacMan2.Pixel2D temp = new PacMan2.Index2D(p2);
-        PacMan2.Pixel2D[] ans = new PacMan2.Pixel2D[p];
-        ans[p-1] = new PacMan2.Index2D(p2);
+        Pixel2D temp = new Index2D(p2);
+        Pixel2D[] ans = new Pixel2D[p];
+        ans[p-1] = new Index2D(p2);
         p--;
         while (ans[0] == null){
             if (temp.getX() != 0){
                 if (pathMap[temp.getX()-1][temp.getY()] == pathMap[temp.getX()][temp.getY()]-1){
-                    ans[p-1] = new PacMan2.Index2D(temp.getX()-1, temp.getY());
+                    ans[p-1] = new Index2D(temp.getX()-1, temp.getY());
                     temp = ans[p-1];
                     p--;
                     continue;
                 }
             } else if (_cyclicFlag) {
                 if (pathMap[pathMap.length-1][temp.getY()] == pathMap[temp.getX()][temp.getY()]-1){
-                    ans[p-1] = new PacMan2.Index2D(pathMap.length-1, temp.getY());
+                    ans[p-1] = new Index2D(pathMap.length-1, temp.getY());
                     temp = ans[p-1];
                     p--;
                     continue;
@@ -183,14 +179,14 @@ public class Map implements PacMan2.Map2D {
             }
             if (temp.getX() != pathMap.length-1){
                 if (pathMap[temp.getX()+1][temp.getY()] == pathMap[temp.getX()][temp.getY()]-1) {
-                    ans[p-1] = new PacMan2.Index2D(temp.getX() + 1, temp.getY());
+                    ans[p-1] = new Index2D(temp.getX() + 1, temp.getY());
                     temp = ans[p-1];
                     p--;
                     continue;
                 }
             } else if (_cyclicFlag) {
                 if (pathMap[0][temp.getY()] == pathMap[temp.getX()][temp.getY()]-1){
-                    ans[p-1] = new PacMan2.Index2D(0, temp.getY());
+                    ans[p-1] = new Index2D(0, temp.getY());
                     temp = ans[p-1];
                     p--;
                     continue;
@@ -198,14 +194,14 @@ public class Map implements PacMan2.Map2D {
             }
             if (temp.getY() != 0){
                 if (pathMap[temp.getX()][temp.getY()-1] == pathMap[temp.getX()][temp.getY()]-1) {
-                    ans[p-1] = new PacMan2.Index2D(temp.getX(),temp.getY()-1);
+                    ans[p-1] = new Index2D(temp.getX(),temp.getY()-1);
                     temp = ans[p-1];
                     p--;
                     continue;
                 }
             } else if (_cyclicFlag) {
                 if (pathMap[temp.getX()][pathMap[0].length-1] == pathMap[temp.getX()][temp.getY()]-1){
-                    ans[p-1] = new PacMan2.Index2D(temp.getX(),pathMap[0].length-1);
+                    ans[p-1] = new Index2D(temp.getX(),pathMap[0].length-1);
                     temp = ans[p-1];
                     p--;
                     continue;
@@ -213,14 +209,14 @@ public class Map implements PacMan2.Map2D {
             }
             if (temp.getY() != pathMap[0].length-1){
                 if (pathMap[temp.getX()][temp.getY()+1] == pathMap[temp.getX()][temp.getY()]-1){
-                    ans[p-1] = new PacMan2.Index2D(temp.getX(),temp.getY()+1);
+                    ans[p-1] = new Index2D(temp.getX(),temp.getY()+1);
                     temp = ans[p-1];
                     p--;
                     continue;
                 }
             } else if (_cyclicFlag) {
                 if (pathMap[temp.getX()][0] == pathMap[temp.getX()][temp.getY()]-1){
-                    ans[p-1] = new PacMan2.Index2D(temp.getX(),0);
+                    ans[p-1] = new Index2D(temp.getX(),0);
                     temp = ans[p-1];
                     p--;
                     continue;
@@ -231,7 +227,7 @@ public class Map implements PacMan2.Map2D {
 	}
 	@Override
 	/////// add your code below ///////
-	public boolean isInside(PacMan2.Pixel2D p) {
+	public boolean isInside(Pixel2D p) {
         try {
             int temp = this._map[p.getX()][p.getY()];
         } catch (NullPointerException error) {
@@ -249,7 +245,7 @@ public class Map implements PacMan2.Map2D {
 	public void setCyclic(boolean cy) {_cyclicFlag = cy;}
 	@Override
 	/////// add your code below ///////
-	public Map2D allDistance(PacMan2.Pixel2D start, int obsColor) {
+	public Map2D allDistance(Pixel2D start, int obsColor) {
         int[][] pathMap = this.getMap();
         for (int i = 0; i < pathMap.length; i++) {
             for (int j = 0; j < pathMap[0].length; j++) {
@@ -259,52 +255,52 @@ public class Map implements PacMan2.Map2D {
                     pathMap[i][j] = -2;
             } //making a new empty map with -1 representing obstacles
         }
-        Queue<PacMan2.Pixel2D> queue = new LinkedList<PacMan2.Pixel2D>();
+        Queue<Pixel2D> queue = new LinkedList<Pixel2D>();
         queue.add(start);
         pathMap[start.getX()][start.getY()] = 0;
         while (queue.peek() != null){
             if (queue.peek().getX() != 0){
                 if (pathMap[queue.peek().getX()-1][queue.peek().getY()] == -2){
-                    PacMan2.Pixel2D temp = new PacMan2.Index2D(queue.peek().getX()-1,queue.peek().getY());
+                    Pixel2D temp = new Index2D(queue.peek().getX()-1,queue.peek().getY());
                     pathMap[temp.getX()][temp.getY()] = pathMap[queue.peek().getX()][queue.peek().getY()]+1;
                     queue.add(temp);
                 }
             } else if (_cyclicFlag) {
                 if (pathMap[pathMap.length-1][queue.peek().getY()] == -2){
-                    PacMan2.Pixel2D temp = new PacMan2.Index2D(pathMap.length-1,queue.peek().getY());
+                    Pixel2D temp = new Index2D(pathMap.length-1,queue.peek().getY());
                     pathMap[temp.getX()][temp.getY()] = pathMap[queue.peek().getX()][queue.peek().getY()]+1;
                     queue.add(temp);
                 }
             }
             if (queue.peek().getX() != pathMap.length-1){
                 if (pathMap[queue.peek().getX()+1][queue.peek().getY()] == -2){
-                    PacMan2.Pixel2D temp = new PacMan2.Index2D(queue.peek().getX()+1,queue.peek().getY());
+                    Pixel2D temp = new Index2D(queue.peek().getX()+1,queue.peek().getY());
                     pathMap[temp.getX()][temp.getY()] = pathMap[queue.peek().getX()][queue.peek().getY()]+1;
                     queue.add(temp);
                 }
             } else if (_cyclicFlag) {
                 if (pathMap[0][queue.peek().getY()] == -2){
-                    PacMan2.Pixel2D temp = new PacMan2.Index2D(0,queue.peek().getY());
+                    Pixel2D temp = new Index2D(0,queue.peek().getY());
                     pathMap[temp.getX()][temp.getY()] = pathMap[queue.peek().getX()][queue.peek().getY()]+1;
                     queue.add(temp);
                 }
             }
             if (queue.peek().getY() != 0){
                 if (pathMap[queue.peek().getX()][queue.peek().getY()-1] == -2){
-                    PacMan2.Pixel2D temp = new PacMan2.Index2D(queue.peek().getX(),queue.peek().getY()-1);
+                    Pixel2D temp = new Index2D(queue.peek().getX(),queue.peek().getY()-1);
                     pathMap[temp.getX()][temp.getY()] = pathMap[queue.peek().getX()][queue.peek().getY()]+1;
                     queue.add(temp);
                 }
             } else if (_cyclicFlag) {
                 if (pathMap[queue.peek().getX()][pathMap[0].length-1] == -2){
-                    PacMan2.Pixel2D temp = new PacMan2.Index2D(queue.peek().getX(),pathMap[0].length-1);
+                    Pixel2D temp = new Index2D(queue.peek().getX(),pathMap[0].length-1);
                     pathMap[temp.getX()][temp.getY()] = pathMap[queue.peek().getX()][queue.peek().getY()]+1;
                     queue.add(temp);
                 }
             }
             if (queue.peek().getY() != pathMap[0].length-1){
                 if (pathMap[queue.peek().getX()][queue.peek().getY()+1] == -2){
-                    PacMan2.Pixel2D temp = new PacMan2.Index2D(queue.peek().getX(),queue.peek().getY()+1);
+                    Pixel2D temp = new Index2D(queue.peek().getX(),queue.peek().getY()+1);
                     pathMap[temp.getX()][temp.getY()] = pathMap[queue.peek().getX()][queue.peek().getY()]+1;
                     queue.add(temp);
                 }
@@ -323,7 +319,7 @@ public class Map implements PacMan2.Map2D {
                     pathMap[i][j] = -1;
             }
         }
-        return new PacMan2.Map(pathMap);
+        return new Map(pathMap);
 	}
    //------------------------Extra functions-----------------------------
     /**This function checks if a given 2D array can be used as a map with 2 criteria:

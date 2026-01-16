@@ -1,6 +1,5 @@
-package PacMan;
+package PacMan2;
 
-import PacMan2.Ex3Main;
 import exe.ex3.game.PacManAlgo;
 import exe.ex3.game.PacmanGame;
 

@@ -6,6 +6,8 @@
       <sourceFolder url="file://$MODULE_DIR$/Textures" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/images" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src2" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

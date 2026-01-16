@@ -1,4 +1,4 @@
-package PacMan;
+package PacMan2;
 
 /**
  * This interface represents an integer based coordinate of a 2D raster (aka a 2D matrix).
@@ -18,7 +18,7 @@ public interface Pixel2D {
      * @throws RuntimeException if p2==null.
      * @return the 2D Euclidean distance between the pixels.
      */
-    public double distance2D(PacMan2.Pixel2D p2);
+    public double distance2D(Pixel2D p2);
 
     /**
      *

@@ -1,12 +1,10 @@
-package PacMan;
+package PacMan2;
 
-import PacMan2.Pixel2D;
-
-public class Index2D implements PacMan2.Pixel2D {
+public class Index2D implements Pixel2D {
     private int _x, _y;
     public Index2D() {this(0,0);}
     public Index2D(int x, int y) {_x=x;_y=y;}
-    public Index2D(PacMan2.Pixel2D t) {this(t.getX(), t.getY());}
+    public Index2D(Pixel2D t) {this(t.getX(), t.getY());}
     @Override
     public int getX() {
         return _x;
@@ -15,7 +13,7 @@ public class Index2D implements PacMan2.Pixel2D {
     public int getY() {
         return _y;
     }
-    public double distance2D(PacMan2.Pixel2D t) {
+    public double distance2D(Pixel2D t) {
             if (t == null){
                 throw new RuntimeException("PacMan.Pixel2D given is null");
             }
@@ -29,8 +27,8 @@ public class Index2D implements PacMan2.Pixel2D {
     public boolean equals(Object t) {
         boolean ans = false;
        /////// you do NOT need to add your code below ///////
-        if(t instanceof PacMan2.Pixel2D) {
-            PacMan2.Pixel2D p = (Pixel2D) t;
+        if(t instanceof Pixel2D) {
+            Pixel2D p = (Pixel2D) t;
             ans = (this.distance2D(p)==0);
         }
        ///////////////////////////////////
